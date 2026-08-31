@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Loofy147/Compute-Qualification-Infrastructure/blob/main/docs/protocol/v0.2/evidence-schema.json",
+  "title": "Venture Evidence Case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "opportunity", "claims", "economics", "legal"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "opportunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "claim"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "claim": {"type": "string", "minLength": 1}
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "economics": {"$ref": "#/$defs/economics"},
+    "legal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"enum": ["NOT_ASSESSED", "ASSESSED_CLEAR", "BLOCKED", "NOT_APPLICABLE"]},
+        "jurisdictions": {"type": "array", "items": {"type": "string"}},
+        "scope": {"type": "array", "items": {"type": "string"}},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "rationale": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "pillar", "statement", "evidence", "falsification"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "pillar": {"enum": ["PAIN", "BUYER", "GAP", "ALTERNATIVE_ATTACK", "ECONOMIC_PROOF", "MOAT", "TECHNICAL_PROOF", "WTP", "LEGAL"]},
+        "statement": {"type": "string", "minLength": 1},
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "falsification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["test", "attempted", "result"],
+          "properties": {
+            "test": {"type": "string", "minLength": 1},
+            "attempted": {"type": "boolean"},
+            "result": {"enum": ["SURVIVED", "FALSIFIED", "INCONCLUSIVE", "NOT_TESTED"]}
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "source_type", "evidence_level", "independence_group", "detail"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "source_type": {"enum": ["CUSTOMER", "PRODUCTION", "COMMERCIAL", "INDEPENDENT_TECHNICAL", "PRIMARY_DOCUMENTATION", "PUBLIC_ARTIFACT", "SECONDARY", "INTERNAL", "OTHER"]},
+        "evidence_level": {"type": "integer", "minimum": 0, "maximum": 5},
+        "independence_group": {"type": "string", "minLength": 1},
+        "detail": {"type": "string", "minLength": 1},
+        "observed_at": {"type": "string"}
+      }
+    },
+    "economic_value": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "economic_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "basis"],
+      "properties": {
+        "value": {"type": "number", "minimum": 0},
+        "basis": {"enum": ["OBSERVED", "CALCULATED", "SCENARIO", "ASSUMPTION"]},
+        "source": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "economics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cac", "ltv", "gross_margin_pct", "payback_months"],
+      "properties": {
+        "cac": {"anyOf": [{"$ref": "#/$defs/economic_input"}, {"type": "null"}]},
+        "ltv": {"anyOf": [{"$ref": "#/$defs/economic_input"}, {"type": "null"}]},
+        "gross_margin_pct": {"anyOf": [{"$ref": "#/$defs/economic_input"}, {"type": "null"}]},
+        "payback_months": {"anyOf": [{"$ref": "#/$defs/economic_input"}, {"type": "null"}]}
+      }
+    }
+  }
+}
