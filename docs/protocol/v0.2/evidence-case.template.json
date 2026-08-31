@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.2",
+  "opportunity": {
+    "id": "opp-001",
+    "name": "",
+    "claim": ""
+  },
+  "claims": [],
+  "economics": {
+    "cac": null,
+    "ltv": null,
+    "gross_margin_pct": null,
+    "payback_months": null
+  },
+  "legal": {
+    "status": "NOT_ASSESSED",
+    "jurisdictions": [],
+    "scope": [],
+    "evidence": [],
+    "rationale": ""
+  }
+}
