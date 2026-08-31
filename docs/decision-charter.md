@@ -1,117 +1,59 @@
-# Decision Charter
+# Decision Charter — CLOSED
 
-## Purpose
+## Final state
 
-This document is the permanent reference for the opportunity decision. Research and implementation must remain subordinate to the decision objective.
+**Decision: KILL**
 
-## Decision
+**Decision date: 2026-08-31**
 
-The project must end in exactly one of:
+This charter governed the opportunity investigation and is now closed. The final decision is recorded in [`decisions/final/2026-08-31-KILL.md`](../decisions/final/2026-08-31-KILL.md).
 
-- **GO:** evidence is sufficient to justify a bounded paid-pilot/productization phase.
-- **PIVOT:** part of the hypothesis is validated, but the current buyer, wedge, workflow, or product form is not the best path.
-- **KILL:** the opportunity does not survive evidence-based review.
+## Decision objective
 
-## Core Hypothesis
+Determine whether a painful, valuable, defensible, and technically feasible business exists around workload-specific, cross-vendor AI compute qualification.
 
-A neutral system can qualify AI compute configurations for specific workloads by linking requirements, model, software stack, hardware, execution, measurements, reproducibility, evidence provenance, and deterministic policy decisions.
+The investigation explicitly allowed only:
 
-## Hypotheses
+- **GO** — proceed to a bounded paid-pilot/productization phase.
+- **PIVOT** — preserve validated evidence but change the buyer, wedge, workflow, or product form.
+- **KILL** — stop the opportunity because the evidence does not justify further investment.
 
-### H1 — Problem
-The target workflow creates material pain, cost, delay, or risk.
+## Hypothesis investigated
 
-### H2 — Gap
-Existing tools and workflows do not adequately solve the complete problem in a neutral, reusable, workload-specific manner.
+> A neutral system can turn workload requirements into reproducible cross-vendor compute qualification decisions by combining workload contracts, execution, environment fingerprinting, performance/quality/energy measurements, evidence provenance, reproducibility checks, and deterministic policy gates.
 
-### H3 — Buyer
-A recognizable buyer owns the problem and has authority/budget to act.
+## Final assessment
 
-### H4 — Economic Value
-The solution produces measurable economic value.
+The underlying operational problem is real. However, the proposed independent product does not clear the required bar for a new business.
 
-### H5 — Technical Feasibility
-A bounded software-only qualification kernel can demonstrate the essential workflow across multiple compute backends.
+The strongest negative findings were:
 
-### H6 — Defensibility
-The product can develop durable advantages beyond commodity benchmarking or wrappers around existing vendor APIs.
+1. Generic performance benchmarking is already served by mature ecosystems such as MLPerf and InferenceX.
+2. Vendor-specific validation, model enablement, deployment, compatibility, and production-readiness capabilities are increasingly comprehensive inside NVIDIA, AMD, AWS, Tenstorrent, d-Matrix, and other ecosystems.
+3. Large operators demonstrate credible internal acceptance/qualification workflows, reducing the need for a general external product.
+4. Independent companies already sell workload-specific accelerator benchmarking and procurement support as services.
+5. The residual hypothesis—customer-owned cross-vendor qualification state and continuous requalification—remained technically plausible, but lacked direct willingness-to-pay evidence and sufficient defensibility against internal tooling and incumbent ecosystems.
 
-### H7 — Willingness to Pay
-At least one credible buyer provides direct commercial evidence, ideally a paid pilot or equivalent commitment.
+## Hard-gate outcome
 
-## Evidence Rules
+The `Unmet Gap` requirement was not satisfied. The opportunity therefore cannot proceed to `GO`.
 
-1. A vendor claim is not independent proof of customer demand.
-2. A competitor is not evidence of a market gap.
-3. Technical feasibility is not evidence of business value.
-4. Market size is not willingness to pay.
-5. Missing evidence is recorded as `UNKNOWN`.
-6. Contradictory evidence must remain visible.
-7. Research conclusions must identify the strongest supporting and opposing evidence.
-8. Scores cannot conceal hard-gate failures.
+Willingness-to-pay also remained unproven.
 
-## Evidence Levels
+## Final rule
 
-| Level | Meaning |
-|---|---|
-| L0 | Claim, marketing statement, or secondary assertion |
-| L1 | Official documentation or first-party technical material |
-| L2 | Reproducible public artifact |
-| L3 | Independent technical evidence |
-| L4 | Customer or production evidence |
-| L5 | Commercial transaction / direct willingness-to-pay evidence |
+No further product development is authorized under this repository.
 
-## Claim Status
+Any future project derived from this research must establish a new opportunity, create a new decision charter, and collect fresh commercial evidence.
+
+## Evidence discipline retained
+
+The investigation retained its evidence vocabulary:
 
 `ESTABLISHED` · `EXPERIMENTALLY_SUPPORTED` · `MARKET_SIGNAL` · `INFERENCE` · `HYPOTHESIS` · `UNKNOWN` · `CONTRADICTED` · `OPEN`
 
-## Scoring
+and evidence levels:
 
-| Criterion | Weight |
-|---|---:|
-| Problem severity | 20 |
-| Unmet gap | 15 |
-| Buyer clarity | 15 |
-| Economic value | 15 |
-| Technical feasibility | 15 |
-| Defensibility | 10 |
-| Willingness to pay | 10 |
+`L0` claim/marketing → `L1` official documentation → `L2` reproducible artifact → `L3` independent evidence → `L4` customer/production evidence → `L5` commercial/WTP evidence.
 
-### Hard Gates
-
-- Problem severity < 3/5 → No-Go
-- Unmet gap < 3/5 → No-Go
-- Buyer clarity < 3/5 → No-Go
-
-### Thresholds
-
-- `GO`: ≥ 75/100 and no hard-gate failure
-- `PIVOT`: 50–74/100
-- `KILL`: < 50/100
-
-## Required Final Evidence
-
-Before GO:
-
-- three or more well-characterized target workflows;
-- documented incumbent alternatives;
-- a working qualification probe;
-- reproducibility demonstration;
-- quantified value model;
-- explicit competitive red-team findings;
-- credible WTP evidence.
-
-Before PIVOT:
-
-- at least one meaningful part of the problem must remain validated;
-- the proposed pivot must address a specific failed assumption.
-
-Before KILL:
-
-- the strongest available evidence must show that the problem, gap, buyer, economics, or defensibility is insufficient.
-
-## Current Decision State
-
-`OPEN`
-
-This charter deliberately prevents premature productization. The repository may contain experiments, prototypes, and research artifacts, but they are evidence-gathering instruments until the decision gates are passed.
+These rules remain useful for future opportunity research.
